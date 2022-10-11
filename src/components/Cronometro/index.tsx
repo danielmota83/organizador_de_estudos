@@ -1,12 +1,14 @@
 import Button from '../Button'
+import Timer from './Timer'
+import style from './Cronometro.module.scss'
 
-export function Cronometro() {
+export default function Cronometro() {
 
     return (
-        <div>
-            <p> Escoolha um card e inicie o relógio </p>
-            <div>
-
+        <div className={style.cronometro}>
+            <p className={style.titulo}> Escoolha um card e inicie o relógio </p>
+            <div className={style.relogioWrapper}>
+                <Timer/>
             </div>
             <Button
                 texto = "Começar!"
