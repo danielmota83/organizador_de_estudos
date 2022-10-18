@@ -16,10 +16,9 @@ function List( {tarefas, selecionaTarefa}:  Props){
             <ul>
                 {tarefas.map((item)=> (
                     <Item
-                    selecionaTarefa = {selecionaTarefa}
-                    key = {item.id}
-                        {...item}
-                    />
+                        tarefas={[]} selecionaTarefa={selecionaTarefa}
+                        key={item.id}
+                        {...item}                    />
                 ))}
                                
             </ul>
