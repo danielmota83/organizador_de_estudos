@@ -12,7 +12,10 @@ interface Props {
 
 export default function Cronometro({selecionado, finalizarTarefa}: Props) {
 
+    const [isRunning, setIsRunning] = useState(false);
+
     const [tempo, setTempo] = useState<number>();
+
     useEffect(() => {
         if(selecionado?.tempo) {
             setTempo(tempoParaSegundos(selecionado.tempo));
@@ -22,7 +25,8 @@ export default function Cronometro({selecionado, finalizarTarefa}: Props) {
        
     function regressiva(contador:number = 0){
         setTimeout(()=>{
-            if(contador >0) {
+
+            if(contador >0 ) {
                 setTempo(contador - 1);
                 return regressiva (contador - 1)
             }
@@ -31,14 +35,18 @@ export default function Cronometro({selecionado, finalizarTarefa}: Props) {
         }, 1000)
     }
 
-    function parar (contador:number = 0) {
-        clearTimeout(contador)
-    }
+    
+    // function parar () {
+    //    setTempo(0)
+      
+       
+       
+    // }
 
-    function resetar (contador:number = 0) {
-        setTempo(tempoParaSegundos(selecionado.tempo))
-        clearTimeout(contador)
-    }
+    // function resetar (contador:number = 0) {
+    //     setTempo(tempoParaSegundos(selecionado.tempo))
+    //     clearTimeout(contador)
+    // }
 
 
         
@@ -52,12 +60,12 @@ export default function Cronometro({selecionado, finalizarTarefa}: Props) {
             <Button onclick={()=> regressiva(tempo)}>
                 Começar
                 </Button>
-                <Button onclick={()=> parar(tempo)}>
+                <Button onclick={()=> {setTempo (0), regressiva(0)}}>
                 Parar
                 </Button>
-                <Button onclick={()=> resetar(tempo)}>
+                {/* <Button onclick={()=> resetar(tempo)}>
                 Resetar
-                </Button>
+                </Button> */}
 
         </div>
         
