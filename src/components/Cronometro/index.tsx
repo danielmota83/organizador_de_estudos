@@ -19,6 +19,7 @@ export default function Cronometro({selecionado, finalizarTarefa}: Props) {
         }
     }, [selecionado])
 
+       
     function regressiva(contador:number = 0){
         setTimeout(()=>{
             if(contador >0) {
@@ -29,22 +30,38 @@ export default function Cronometro({selecionado, finalizarTarefa}: Props) {
 
         }, 1000)
     }
+
+    function parar (contador:number = 0) {
+        clearTimeout(contador)
+    }
+
+    function resetar (contador:number = 0) {
+        setTempo(tempoParaSegundos(selecionado.tempo))
+        clearTimeout(contador)
+    }
+
+
         
 
     return (
         <div className={style.cronometro}>
-            <p className={style.titulo}> Escoolha um card e inicie o cronômetro </p>
+            <p className={style.titulo}> Escolha uma tarefa e inicie o cronômetro </p>
             <div className={style.relogioWrapper}>
                 <Timer tempo={tempo}/>
             </div>
             <Button onclick={()=> regressiva(tempo)}>
-                Começar!
+                Começar
                 </Button>
+                <Button onclick={()=> parar(tempo)}>
+                Parar
+                </Button>
+                <Button onclick={()=> resetar(tempo)}>
+                Resetar
+                </Button>
+
         </div>
         
     )
 }
 
-// function finalizarTarefa() {
-//     throw new Error('Function not implemented.');
-// }
+
